@@ -10,11 +10,3 @@ try{
 } catch (error) {
   console.log(error)
 }
-
-// mongoose.connect(URI_MONGO, (error) => {
-//   if (error) {
-//     console.log(error)
-//   } else {
-//     console.log('Conectado a la base de datos')
-//   }
-// })

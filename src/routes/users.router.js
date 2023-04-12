@@ -15,31 +15,31 @@ router.get('/products', async (req, res) => {
 
 //? Mongo
 // ? Registro sin passport
-// router.post('/registro', async (req, res) => {
-//     const { email, password } = req.body
-//     const existeUsuario = await usersModel.find({ email })
-//     console.log(existeUsuario)
-//     if (existeUsuario.length !== 0) {
-//         res.redirect('/views/errorRegistro')
-//     } else {
-//         const hashNewPassword = await hashPassword(password)
-//         const newUser = { ...req.body, password: hashNewPassword }
-//         await usersModel.create(newUser)
-//         res.redirect('/views/login')
-//     }
-// }
-// )
+router.post('/registro', async (req, res) => {
+    const { email, password } = req.body
+    const existeUsuario = await usersModel.find({ email })
+    console.log(existeUsuario)
+    if (existeUsuario.length !== 0) {
+        res.redirect('/views/errorRegistro')
+    } else {
+        const hashNewPassword = await hashPassword(password)
+        const newUser = { ...req.body, password: hashNewPassword }
+        await usersModel.create(newUser)
+        res.redirect('/views/login')
+    }
+}
+)
 
 
 //? Registro con passport
-router.post('/registro', passport.authenticate('registro', {
-    failureRedirect: '/views/errorRegistro',
-    // successRedirect: '/views/products',
-    // passReqToCallback: true
-}, (req, res) => {
-    res.redirect('/views/products')
-})
-)
+// router.post('/registro', passport.authenticate('registro', {
+//     failureRedirect: '/views/errorRegistro',
+//     // successRedirect: '/views/products',
+//     // passReqToCallback: true
+// }, (req, res) => {
+//     res.redirect('/views/products')
+// })
+// )
 
 
 router.post('/login', async (req, res) => {
